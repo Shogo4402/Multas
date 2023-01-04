@@ -5,7 +5,7 @@ import glob
 from natsort import natsorted
 from scipy.stats import norm
 
-def img_change(img):
+def img_change(img,iw,ih):
   img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
   # ガウシアンぼかし
   img = cv2.GaussianBlur(img, (3,3), 0)
