@@ -58,7 +58,7 @@ def pos_gaussian_list(poslist,no,One_or_Pro,MIN_MAX,PN):
       print(0/0)
     return np.array(tea_data)
 
-def making_dataset(folder_name):
+def making_dataset(folder_name,One_or_Pro=None,MIN_MAX=None,PN=None):
     #image files download
     kind = folder_name.split("/")[3]
     image_files = natsorted(glob.glob(folder_name+"image/*"))
@@ -75,9 +75,9 @@ def making_dataset(folder_name):
       post_list.append(float(pd.split("\t")[5]))
       
     ytrain_list = []
-    ytrain_list.append(pos_gaussian_list(posx_list,0))
-    ytrain_list.append(pos_gaussian_list(posy_list,1))
-    ytrain_list.append(pos_gaussian_list(post_list,2))
+    ytrain_list.append(pos_gaussian_list(posx_list,0,One_or_Pro,MIN_MAX,PN))
+    ytrain_list.append(pos_gaussian_list(posy_list,1,One_or_Pro,MIN_MAX,PN))
+    ytrain_list.append(pos_gaussian_list(post_list,2,One_or_Pro,MIN_MAX,PN))
 
     input_list = []
     for imagef in image_files:
