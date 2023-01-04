@@ -58,7 +58,7 @@ def pos_gaussian_list(poslist,no,One_or_Pro,MIN_MAX,PN):
       print(0/0)
     return np.array(tea_data)
 
-def making_dataset(folder_name,One_or_Pro,MIN_MAX,PN):
+def making_dataset(folder_name,One_or_Pro=None,MIN_MAX=None,PN=None,iw=200,ih=200):
     #image files download
     kind = folder_name.split("/")[3]
     image_files = natsorted(glob.glob(folder_name+"image/*"))
@@ -82,7 +82,7 @@ def making_dataset(folder_name,One_or_Pro,MIN_MAX,PN):
     input_list = []
     for imagef in image_files:
         img = cv2.imread(imagef)
-        img =img_change(img)
+        img =img_change(img,iw,ih)
         input_list.append(img)
 
     #dataset 作成
