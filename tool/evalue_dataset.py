@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 from natsort import natsorted
-import preparation_dataset as pred
+import sys
+sys.path.append("/content/Multas")
+import tool.preparation_dataset as pred
 
 def rmse_self(y_test,prediction):
   num = y_test.shape[0]
