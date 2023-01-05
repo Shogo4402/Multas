@@ -79,3 +79,21 @@ def true_result(PRE,MIN_MAX,PN):
     list_true.append(true_li)
     c+=1
   return np.array(Err_list),np.array(list_pre),np.array(list_true)
+
+def length_error_compare(tx,ex):
+  hoge = np.stack((tx,ex),axis=1)
+  hog = hoge[hoge[:,0].argsort(), :]
+  step_list = []
+  sum_err = 0
+  sum_len = 0
+  
+  for i in range(len(hog)):
+    sum_len = hog[i][0]
+    sum_err+=hog[i][1]
+    v_len = sum_len
+    v_err = sum_err/(i+1)
+    step_list.append([v_len,v_err])
+  step_arr = np.array(step_list)
+  plt.plot(step_arr[:,0],step_arr[:,1])
+  plt.show()
+  return step_arr
