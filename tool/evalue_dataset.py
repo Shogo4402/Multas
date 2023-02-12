@@ -97,3 +97,35 @@ def length_error_compare(tx,ex):
   plt.plot(step_arr[:,0],step_arr[:,1])
   plt.show()
   return step_arr
+
+def result_super_max(y_arr,no,MIN_MAX,PN):
+  x2 = np.linspace(MIN_MAX[no][0], MIN_MAX[no][1], PN[no])
+  seki = y_arr*x2
+  return np.max(seki)
+
+def true_max_result(PRE,MIN_MAX,PN):
+  fr = open("./dataset_PosEst/valid/"+"position_valid.txt", 'r')
+  pos_datas = fr.readlines()
+  fr.close()
+  image_files = natsorted(glob.glob("/content/dataset_PosEst/valid/"+"image/*"))
+  pos_datas = pred.datalist_sorted(image_files,pos_datas)
+  pos_datas = get_poslist(pos_datas)
+  Err_list = []
+  list_pre = []
+  list_true = []
+  c = 0
+  for pre,pos in zip(PRE,pos_datas):
+    err_li = []
+    pre_li = []
+    true_li = []
+    for pre_vp,vt in zip(pre,pos):
+      vp = result_super_max(pre_vp,c,MIN_MAX,PN)
+      err = abs(vp-vt)
+      err_li.append(err)
+      pre_li.append(vp)
+      true_li.append(vt)
+    Err_list.append(err_li)
+    list_pre.append(pre_li)
+    list_true.append(true_li)
+    c+=1
+  return np.array(Err_list),np.array(list_pre),np.array(list_true)
